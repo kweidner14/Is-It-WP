@@ -18,7 +18,7 @@ add_action( 'wp_enqueue_scripts', 'isitwp_enqueue_style' );
 
 function isitwp_check($atts = [], $content = null, $tag = '') {
 
-    // Define a rate limit
+    // Define the rate limit
     $rate_limit = 10;  // Max 10 requests
     $rate_time = 60;  // within 60 seconds
 
@@ -32,21 +32,21 @@ function isitwp_check($atts = [], $content = null, $tag = '') {
         }
     }
 
-// Hash the concatenated IPs for a more secure and uniform key
+    // Hash the concatenated IPs for a more secure and uniform key
     $rate_limit_key = 'rate_limit_' . md5($user_ip_concatenated);
 
-// Existing rate limit code
+    // Rate Limiting
     $rate_limit_count = get_transient($rate_limit_key);
 
     if ($rate_limit_count >= $rate_limit) {
-        // Logging the rate-limit violation could be useful
+        // Logging the rate-limit violation could be useful to identify potentially malicious users
         error_log("Rate limit reached for IP: " . $user_ip_concatenated);
         return esc_html("You have reached your rate limit. Please wait before trying again.");
     }
 
     ob_start();
 
-    // Adding a nonce field
+    // The input field with a nonce
     $nonce = wp_create_nonce('isitwp_check_nonce');
     echo '<form method="post" id="check-wordpress">
         <input type="text" name="url" id="check-input-field" placeholder="Enter a URL" required>
@@ -57,8 +57,8 @@ function isitwp_check($atts = [], $content = null, $tag = '') {
     // Check if form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["url"])) {
         if (wp_verify_nonce($_POST['_wpnonce'], 'isitwp_check_nonce')) {
-            // Process your form here
-            $url = filter_input(INPUT_POST, 'url', FILTER_SANITIZE_URL); // Sanitizing
+            // Process input from form
+            $url = filter_input(INPUT_POST, 'url', FILTER_SANITIZE_URL);
             $result = check_wordpress($url);
 
             // Increment rate limit count
@@ -68,6 +68,7 @@ function isitwp_check($atts = [], $content = null, $tag = '') {
                 set_transient($rate_limit_key, ($rate_limit_count + 1), $rate_time);
             }
 
+            // Display results
             echo "<div class='analysis-results'>
             <p><span style='font-weight:bold;'>Website Analyzed:</span> " . esc_html($url) . "</p>
             <p><span style='font-weight:bold;'>Result:</span> " . esc_html($result) . "</p>
@@ -151,11 +152,6 @@ function check_wordpress($url) {
     curl_close($ch);
 
     return esc_html("This website doesn't appear to be built using WordPress. Some web hosts attempt to obscure that a website is built with WordPress. If you believe the website is built with WordPress, please try analyzing a different page of the website.");
-}
-
-if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["url"])) {
-    $url = filter_input(INPUT_POST, 'url', FILTER_SANITIZE_URL); // Sanitizing
-    $result = check_wordpress($url);
 }
 
 // Create shortcode for the form [isitwp_check]
