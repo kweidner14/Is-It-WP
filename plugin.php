@@ -6,6 +6,16 @@ Version: 1.1.2
 Author: Kyle Weidner
 */
 
+// Enqueue stylesheet
+function isitwp_enqueue_style() {
+    // Register the style
+    wp_register_style( 'isitwp_styles', plugin_dir_url( __FILE__ ) . 'style.css' );
+
+    // Enqueue the style
+    wp_enqueue_style( 'isitwp_styles' );
+}
+add_action( 'wp_enqueue_scripts', 'isitwp_enqueue_style' );
+
 function isitwp_check($atts = [], $content = null, $tag = '') {
 
     // Define a rate limit
@@ -39,7 +49,7 @@ function isitwp_check($atts = [], $content = null, $tag = '') {
     // Adding a nonce field
     $nonce = wp_create_nonce('isitwp_check_nonce');
     echo '<form method="post" id="check-wordpress">
-        <input type="text" name="url" placeholder="Enter a URL" required>
+        <input type="text" name="url" id="check-input-field" placeholder="Enter a URL" required>
         <input type="hidden" name="_wpnonce" value="'. esc_attr($nonce) .'">
         <input type="submit" value="Check">
     </form>';
