@@ -2,7 +2,7 @@
 /*
 Plugin Name: Is It WP Checker
 Description: A simple plugin to check if a website is built with WordPress.com or WordPress.org
-Version: 1.1.1
+Version: 1.1.2
 Author: Kyle Weidner
 */
 
@@ -11,6 +11,28 @@ function isitwp_check($atts = [], $content = null, $tag = '') {
     // Define a rate limit
     $rate_limit = 10;  // Max 10 requests
     $rate_time = 60;  // within 60 seconds
+
+    // Concatenate various sources of IPs
+    $ip_keys = ['REMOTE_ADDR', 'HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR'];
+    $user_ip_concatenated = '';
+
+    foreach($ip_keys as $key) {
+        if (isset($_SERVER[$key])) {
+            $user_ip_concatenated .= $_SERVER[$key];
+        }
+    }
+
+// Hash the concatenated IPs for a more secure and uniform key
+    $rate_limit_key = 'rate_limit_' . md5($user_ip_concatenated);
+
+// Existing rate limit code
+    $rate_limit_count = get_transient($rate_limit_key);
+
+    if ($rate_limit_count >= $rate_limit) {
+        // Logging the rate-limit violation could be useful
+        error_log("Rate limit reached for IP: " . $user_ip_concatenated);
+        return esc_html("You have reached your rate limit. Please wait before trying again.");
+    }
 
     // Rate limiting based on IP address
     $user_ip = $_SERVER['REMOTE_ADDR'];
