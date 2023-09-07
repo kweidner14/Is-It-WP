@@ -8,7 +8,6 @@ Author: Kyle Weidner
 
 /*
  * TODO
- *  1. Prevent SQL Injections
  *  2. Improve General Security
  *  3. Style Admin Page
  *  4. Break up code into separate files for easier readability / maintainability
@@ -33,7 +32,7 @@ function isitwp_create_tables() {
     $table_name_2 = $wpdb->prefix . 'isitwp_ips';
 
     // Check if table already exists
-    if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+    if ($wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $table_name)) != $table_name) {
         $sql = "CREATE TABLE $table_name (
             id INT(11) AUTO_INCREMENT PRIMARY KEY,
             url VARCHAR(255) NOT NULL,
@@ -45,7 +44,7 @@ function isitwp_create_tables() {
         dbDelta( $sql );
     }
 
-    if ($wpdb->get_var("SHOW TABLES LIKE '$table_name_2'") != $table_name_2) {
+    if ($wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $table_name_2)) != $table_name_2) {
         $sql2 = "CREATE TABLE $table_name_2 (
             id INT(11) AUTO_INCREMENT PRIMARY KEY,
             ip TEXT NOT NULL,
@@ -152,7 +151,7 @@ function isitwp_check($atts = [], $content = null, $tag = '') {
 
         } else {
             // The nonce is invalid, do not process the form
-            echo 'Security check failed!';
+            echo esc_html('Security check failed!');
         }
     }
     return ob_get_clean();
@@ -282,7 +281,7 @@ function isitwp_export_to_csv($suffix) {
         fclose($fp);
         exit;
     } else {
-        echo 'No records found!';
+        echo esc_html('No records found!');
     }
 }
 
