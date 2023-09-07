@@ -1,53 +1,64 @@
 # Is It WP Checker
 
-**Version 1.0**
-
-Is It WP Checker is a simple WordPress plugin that allows users to check if a website is built with WordPress.
-
 ## Description
 
-This plugin takes a URL input from the user and checks if the website is built with WordPress. It differentiates between
-WordPress.org and WordPress.com sites. If a website is not built using WordPress, it will display an appropriate 
-message.
+The **Is It WP Checker** is a simple WordPress plugin that allows users to check if a given website is built with WordPress.com or WordPress.org. This is particularly useful for web developers, designers, and marketers who want to get insights about a website's underlying technology.
+
+**Version:** 1.1.2  
+**Author:** Kyle Weidner
+
+## Features
+
+- Simple user interface: Just enter the URL and click "Check".
+- Rate-limited to prevent abuse: Users can only perform a limited number of checks within a given time.
+- Secure: Uses WordPress nonces for form submission.
 
 ## Installation
 
-1. Upload the plugin files to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins 
-screen directly.
-2. Activate the plugin through the 'Plugins' screen in WordPress.
-3. Use the `[isitwp_check]` shortcode in your posts or pages to display the plugin's form.
+###Method 1:
+1. Download the plugin.
+2. Upload the zipped plugin through the 'Plugins' menu in WordPress
+3. Activate the plugin through the 'Plugins' menu in WordPress
+4. Use the shortcode `[isitwp_check]` in your posts or pages to display the form.
+
+###Method 2:
+1. Download the plugin and unzip it.
+2. Upload the entire `is-it-wp-checker/` directory to the `/wp-content/plugins/` directory.
+3. Activate the plugin through the 'Plugins' menu in WordPress.
+4. Use the shortcode `[isitwp_check]` in your posts or pages to display the form.
 
 ## Usage
 
-Simply enter the URL of the website you want to check into the form and click the 'Check' button. The plugin will 
-analyze the website and display whether it was built using WordPress.com or WordPress.org, or if it doesn't appear to be
-built using WordPress.
+1. After the plugin is activated, go to any post or page and add the shortcode `[isitwp_check]`.
+2. Visit the page, and you'll see a form asking for a URL.
+3. Enter the URL of the website you want to check and click "Check".
+4. The plugin will analyze the URL and display whether the website is built with WordPress.com or WordPress.org.
 
-## FAQ
+## Security Measures
 
-**Q: Does this plugin differentiate between WordPress.org and WordPress.com sites?**
-
-A: Yes, the plugin checks for certain characteristics specific to both WordPress.org and WordPress.com sites and 
-provides a differentiated output accordingly.
-
-**Q: What do I do if the plugin says a website doesn't appear to be built using WordPress, but I know it is?**
-
-A: The plugin checks for certain common characteristics of WordPress sites, but it's possible for a WordPress site to be
-configured in a way that it doesn't exhibit these characteristics, or the web host is obscuring these configurations. If
-you're certain a site is built with WordPress and the plugin says it isn't, it's likely such a case. You can try 
-scanning a few different pages of the website to attempt to product the correct results.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file in the project root for more information.
-
+- The plugin uses WordPress nonces for form submission to prevent CSRF attacks.
+- Input sanitization is performed on form fields.
+- Rate-limited to prevent abuse: Users can only perform a limited number of checks within a given time.
 
 ## Changelog
 
-**1.0**
+### Version 1.1.2
+
+- Added rate-limiting features.
+- Improved the security by implementing WordPress nonces.
+
+### Version 1.1.1
+
+- Fixed minor bugs.
+
+### Version 1.1.0
+
+- Added feature to distinguish between WordPress.com and WordPress.org.
+
+### Version 1.0.0
 
 - Initial release.
 
-## Author
+## License
 
-Kyle Weidner
+This plugin is licensed under the MIT license. License information can be found in the LICENSE.txt file.
