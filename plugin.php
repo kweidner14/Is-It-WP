@@ -2,11 +2,25 @@
 /*
 Plugin Name: Is It WP Checker
 Description: A simple plugin to check if a website is built with WordPress.com or WordPress.org
-Version: 1.1.0
+Version: 1.1.1
 Author: Kyle Weidner
 */
 
 function isitwp_check($atts = [], $content = null, $tag = '') {
+
+    // Define a rate limit
+    $rate_limit = 10;  // Max 10 requests
+    $rate_time = 60;  // within 60 seconds
+
+    // Rate limiting based on IP address
+    $user_ip = $_SERVER['REMOTE_ADDR'];
+    $rate_limit_key = 'rate_limit_' . $user_ip;
+    $rate_limit_count = get_transient($rate_limit_key);
+
+    if ($rate_limit_count >= $rate_limit) {
+        return esc_html("You have reached your rate limit. Please wait before trying again.");
+    }
+
     ob_start();
 
     // Adding a nonce field
@@ -23,6 +37,14 @@ function isitwp_check($atts = [], $content = null, $tag = '') {
             // Process your form here
             $url = filter_input(INPUT_POST, 'url', FILTER_SANITIZE_URL); // Sanitizing
             $result = check_wordpress($url);
+
+            // Increment rate limit count
+            if ($rate_limit_count === false) {
+                set_transient($rate_limit_key, 1, $rate_time);
+            } else {
+                set_transient($rate_limit_key, ($rate_limit_count + 1), $rate_time);
+            }
+
             echo "<div class='analysis-results'>
             <p><span style='font-weight:bold;'>Website Analyzed:</span> " . esc_html($url) . "</p>
             <p><span style='font-weight:bold;'>Result:</span> " . esc_html($result) . "</p>
@@ -36,6 +58,8 @@ function isitwp_check($atts = [], $content = null, $tag = '') {
 }
 
 function check_wordpress($url) {
+
+
 
     // Check if we can use cURL
     if (!function_exists('curl_init')) {
