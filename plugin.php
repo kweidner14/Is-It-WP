@@ -36,6 +36,12 @@ function isitwp_check($atts = [], $content = null, $tag = '') {
 }
 
 function check_wordpress($url) {
+
+    // Check if we can use cURL
+    if (!function_exists('curl_init')) {
+        die('cURL not available!');
+    }
+
     // Initialize cURL
     $ch = curl_init();
 
@@ -66,8 +72,6 @@ function check_wordpress($url) {
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); // Follow redirects
     curl_setopt($ch, CURLOPT_TIMEOUT, 15); // Setting a timeout in seconds
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); // Enable SSL certificate verification
-
-
 
     // Try getting the content of the site
     $content = curl_exec($ch);
