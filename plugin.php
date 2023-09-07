@@ -34,15 +34,6 @@ function isitwp_check($atts = [], $content = null, $tag = '') {
         return esc_html("You have reached your rate limit. Please wait before trying again.");
     }
 
-    // Rate limiting based on IP address
-    $user_ip = $_SERVER['REMOTE_ADDR'];
-    $rate_limit_key = 'rate_limit_' . $user_ip;
-    $rate_limit_count = get_transient($rate_limit_key);
-
-    if ($rate_limit_count >= $rate_limit) {
-        return esc_html("You have reached your rate limit. Please wait before trying again.");
-    }
-
     ob_start();
 
     // Adding a nonce field
@@ -80,8 +71,6 @@ function isitwp_check($atts = [], $content = null, $tag = '') {
 }
 
 function check_wordpress($url) {
-
-
 
     // Check if we can use cURL
     if (!function_exists('curl_init')) {
