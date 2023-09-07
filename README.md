@@ -24,7 +24,7 @@ The **Is It WP Checker** is a versatile WordPress plugin that enables users to a
 1. Download the plugin.
 2. Upload the zipped plugin through the 'Plugins' menu in WordPress.
 3. Activate the plugin through the 'Plugins' menu in WordPress.
-4. Implement the shortcode `[isitwp_check]` within your posts or pages to unveil the form.
+4. Implement the shortcode `[isitwp_check]` within your posts or pages to showcase the form.
 
 ### Method 2:
 1. Download the plugin and extract its contents.
