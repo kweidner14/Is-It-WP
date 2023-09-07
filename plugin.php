@@ -58,13 +58,15 @@ function check_wordpress($url) {
         return esc_html("Invalid URL. Please make sure the URL is correct and try again.");
     }
 
-
     // Set the URL
     curl_setopt($ch, CURLOPT_URL, $url);
 
     // Set cURL options
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // Return the result as a string
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); // Follow redirects
+    curl_setopt($ch, CURLOPT_TIMEOUT, 15); // Setting a timeout in seconds
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); // Enable SSL certificate verification
+
 
 
     // Try getting the content of the site
