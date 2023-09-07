@@ -1,0 +1,28 @@
+#check-wordpress {
+    display: flex;
+    gap: 5px;
+}
+
+#check-wordpress #check-input-field {
+    border: 1px solid #afafaf;
+    font-size: 1em;
+    font-family: inherit;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+#check-wordpress input[type='submit'] {
+    font-size: 1em;
+    padding: 5px 10px;
+    background-color: #13e213;
+    color: black;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#check-wordpress input[type='submit']:hover {
+    background-color: #32a232;
+
+
+}
