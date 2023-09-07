@@ -54,12 +54,18 @@ function check_wordpress($url) {
         return esc_html("This website was built using WordPress.com");
     }
 
+    if (filter_var($url, FILTER_VALIDATE_URL) === false) {
+        return esc_html("Invalid URL. Please make sure the URL is correct and try again.");
+    }
+
+
     // Set the URL
     curl_setopt($ch, CURLOPT_URL, $url);
 
     // Set cURL options
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // Return the result as a string
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); // Follow redirects
+
 
     // Try getting the content of the site
     $content = curl_exec($ch);
@@ -74,7 +80,7 @@ function check_wordpress($url) {
     // If both attempts fail, return an error message
     if ($content === false) {
         curl_close($ch);
-        return esc_html("An error occurred. Please make sure the URL is correct and try again.");
+        return esc_html("Invalid URL. Please make sure the URL is correct and try again.");
     }
 
     // Check for WordPress.com-specific script source
