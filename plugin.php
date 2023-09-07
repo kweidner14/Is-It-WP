@@ -179,12 +179,10 @@ function check_wordpress($url) {
     // Check if the website is a subdomain of wordpress.com
     if (strpos($parsed_url['host'], 'wordpress.com') !== false) {
         curl_close($ch);
-//        return esc_html("This website was built using WordPress.com");
         return 1;
     }
 
     if (filter_var($url, FILTER_VALIDATE_URL) === false) {
-//        return esc_html("Invalid URL. Please make sure the URL is correct and try again.");
         return 4;
     }
 
@@ -210,14 +208,12 @@ function check_wordpress($url) {
     // If both attempts fail, return an error message
     if ($content === false) {
         curl_close($ch);
-//        return esc_html("Invalid URL. Please make sure the URL is correct and try again.");
         return 4;
     }
 
     // Check for WordPress.com-specific script source
     if (strpos($content, 's0.wp.com') !== false) {
         curl_close($ch);
-//        return esc_html("This website was built using WordPress.com");
         return 1;
     }
 
@@ -226,13 +222,11 @@ function check_wordpress($url) {
         strpos($content, 'wp-content') !== false ||
         strpos($content, 'wp-includes') !== false) {
         curl_close($ch);
-//        return esc_html("This website was built using WordPress.org");
         return 2;
     }
 
     curl_close($ch);
 
-//    return esc_html("This website doesn't appear to be built using WordPress. Some web hosts attempt to obscure that a website is built with WordPress. If you believe the website is built with WordPress, please try analyzing a different page of the website.");
     return 3;
 }
 
