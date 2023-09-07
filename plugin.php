@@ -7,18 +7,18 @@ Author: Kyle Weidner
 */
 
 // Include the necessary files
-include_once('database-operations.php');
-include_once('rate-limiting.php');
-include_once('website-checking.php');
-include_once('exporting.php');
-include_once('admin-operations.php');
+include_once('includes/core/database-operations.php');
+include_once('includes/admin/class-rate-limit.php');
+include_once('includes/public/class-website-checker.php');
+include_once('includes/admin/class-export.php');
+include_once('includes/admin/admin-operations.php');
 
 isitwp_create_tables();
 
 // Enqueue stylesheet
 function isitwp_enqueue_style() {
     // Register the style
-    wp_register_style( 'isitwp_styles', plugin_dir_url( __FILE__ ) . 'style.css' );
+    wp_register_style( 'isitwp_styles', plugin_dir_url( __FILE__ ) . 'assets/css/style.css' );
 
     // Enqueue the style
     wp_enqueue_style( 'isitwp_styles' );
