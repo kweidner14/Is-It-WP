@@ -6,6 +6,14 @@ Version: 1.1.2
 Author: Kyle Weidner
 */
 
+/*
+ * TODO
+ *  1. Prevent SQL Injections
+ *  2. Improve General Security
+ *  3. Style Admin Page
+ *  4. Break up code into separate files for easier readability / maintainability
+ */
+
 // Enqueue stylesheet
 function isitwp_enqueue_style() {
     // Register the style
