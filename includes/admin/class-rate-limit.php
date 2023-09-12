@@ -2,7 +2,7 @@
 function rate_limiting()
 {
     // Define the rate limit
-    $rate_limit = 11;  // Max 10 requests. Set to 11 because we increment $rate_count before running the function, so the array starts at 1 instead of 0.
+    $rate_limit = 10; // 10 requests
     $rate_time = 60;  // within 60 seconds
 
     // Concatenate various sources of IPs
@@ -22,7 +22,7 @@ function rate_limiting()
     $rate_limit_count = get_transient($rate_limit_key);
 
     // Check if limit has been reached
-    if ($rate_limit_count >= $rate_limit) {
+    if ($rate_limit_count > $rate_limit) {
         // Insert IP into database table
         insert_ip_to_db(esc_html('isitwp_ips'), $user_ip_concatenated);
         return [
