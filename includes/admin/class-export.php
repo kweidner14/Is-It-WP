@@ -1,5 +1,5 @@
 <?php
-// Function to export URLs and Results to a CSV file
+// Function to export URLs and IPs to a CSV file
 function isitwp_export_to_csv($suffix) {
     global $wpdb;
     $table_name = $wpdb->prefix . 'isitwp_' . $suffix;
