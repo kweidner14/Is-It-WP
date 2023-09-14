@@ -33,14 +33,14 @@ function isitwp_create_tables() {
 // Run the function when the plugin is activated
 register_activation_hook( __FILE__, 'isitwp_create_tables' );
 
-function insert_ip_to_db($suffix, $user_ip_concatenated) {
+function insert_ip_to_db($suffix, $ip) {
     // Insert IP into database table
     global $wpdb;
     $table_name = $wpdb->prefix . $suffix;
     $wpdb->insert(
         $table_name,
         array(
-            'ip' => $user_ip_concatenated
+            'ip' => $ip
         )
     );
 }
