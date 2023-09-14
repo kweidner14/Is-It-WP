@@ -9,7 +9,7 @@ function rate_limiting()
     // Note: May need to adjust this in the future to deal with VPNs and bots/bad actors
     $ip = $_SERVER['REMOTE_ADDR'];
 
-    // Hash the concatenated IPs for a more secure and uniform key
+    // Hash the IPs for a more secure and uniform key
     $rate_limit_key = 'rate_limit_' . md5($ip);
 
     // Rate Limiting
