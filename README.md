@@ -2,21 +2,20 @@
 
 ## Description
 
-The **Is It WP Checker** is a versatile WordPress plugin that enables users to ascertain if a specific website is constructed using WordPress.com or WordPress.org. It's an invaluable tool for web developers, designers, and marketers keen on understanding a website's foundational technology.
+The **Is It WP Checker** is a WordPress plugin that enables users to determine if a given website is built using WordPress.com or WordPress.org. This tool is invaluable for web developers, designers, and marketers who want to understand the foundational technology of a website.
 
-**Version:** 1.2.0  
+**Version:** 1.2.1  
 **Author:** Kyle Weidner
 
 ## Features
 
-- **Simple User Interface**: Easily input the URL and click "Check".
-- **Admin Dashboard**: Find a dedicated section under the "Tools" category in the WordPress dashboard.
-- **Data Storage**: The plugin now records URL entries and IP addresses of rate-limited users into the database.
-- **Data Export**: Admins have the capability to export URLs and IP addresses as distinct CSV files.
-- **Enhanced Design**: Integrated a new stylesheet for polished plugin interfaces.
-- **Code Improvement**: Major code refactoring for modularization and maintainability.
-- **Rate Limiting**: Users can only conduct a specific number of checks within a certain timeframe, and IP addresses of users who exceed this limit are stored.
-- **Heightened Security**: Employs WordPress nonces for form submission, improved input/output sanitization, and measures to counteract SQL injection attacks.
+- **Simple User Interface**: Simply input a URL and click "Check".
+- **Admin Dashboard**: Locate a dedicated section under the "Tools" category in the WordPress dashboard.
+- **Data Storage**: Stores URL entries and IP addresses of rate-limited users into the database.
+- **Data Export**: Admins can export URL and IP address data as separate CSV files.
+- **Enhanced Design**: A new stylesheet has been integrated for a polished plugin interface.
+- **Code Improvement**: Major code refactoring for better modularization and maintainability.
+- **Rate Limiting**: A certain number of checks within a specific timeframe are allowed, and IP addresses exceeding this limit are stored.
 
 ## Installation
 
@@ -24,56 +23,59 @@ The **Is It WP Checker** is a versatile WordPress plugin that enables users to a
 1. Download the plugin.
 2. Upload the zipped plugin through the 'Plugins' menu in WordPress.
 3. Activate the plugin through the 'Plugins' menu in WordPress.
-4. Implement the shortcode `[isitwp_check]` within your posts or pages to showcase the form.
+4. Implement the shortcode `[isitwp_check]` on your posts or pages to display the form.
 
 ### Method 2:
-1. Download the plugin and extract its contents.
-2. Transfer the complete `is-it-wp-checker/` directory to the `/wp-content/plugins/` directory.
+1. Download the plugin and extract the contents.
+2. Transfer the entire `is-it-wp-checker/` directory to the `/wp-content/plugins/` directory.
 3. Activate the plugin through the 'Plugins' menu in WordPress.
-4. Integrate the shortcode `[isitwp_check]` in your content to showcase the form.
+4. Use the shortcode `[isitwp_check]` in your content to display the form.
 
 ## Usage
 
-1. Once the plugin is operational, navigate to any post or page and incorporate the shortcode `[isitwp_check]`.
-2. Visit the said page, where you'll be greeted with a form requesting a URL.
-3. Input the desired website URL and hit "Check".
-4. The plugin will then scrutinize the URL, revealing whether the website utilizes WordPress.com or WordPress.org.
+1. After activating the plugin, go to any post or page and use the shortcode `[isitwp_check]`.
+2. Visit the page, where you will find a form asking for a URL.
+3. Enter the URL of the website you want to check and click "Check".
+4. The plugin will then analyze the URL and inform you whether the website uses WordPress.com or WordPress.org.
 
 ## Security Measures
 
-- **Form Safety**: Utilizes WordPress nonces for form submission, thwarting CSRF assaults.
-- **Input/Output Protection**: Enforces rigorous input/output sanitization.
-- **SQL Injection Prevention**: Advanced measures have been implemented to prevent potential SQL injection attacks.
-- **Rate Limiting**: Records the IP addresses of users who frequently surpass the set check limit.
+- **Input/Output Protection**: Applies strict input/output sanitization.
+- **SQL Injection Prevention**: Employed measures to prevent potential SQL injection attacks.
+- **Rate Limiting**: Logs the IP addresses of users who frequently exceed the specified check limit.
 
 ## Changelog
 
+### Version 1.2.1
+
+- Removed nonce check for broad accessibility and user experience improvement.
+
 ### Version 1.2.0
 
-- Introduced an admin dashboard section under "Tools".
-- Enabled storing of URL entries and rate-limited user IP addresses in the database.
-- Granted admins the ability to export data (URLs & IPs) as CSV files.
-- Incorporated a new stylesheet for enhanced plugin interface aesthetics.
-- Undertook a major code refactor for modularization.
-- Elevated security levels with input/output sanitization and SQL injection prevention measures.
+- Added an admin dashboard section under "Tools".
+- Enabled storage of URL entries and rate-limited user IP addresses in the database.
+- Enabled admins to export data (URLs & IPs) as CSV files.
+- Introduced a new stylesheet for enhanced plugin interface design.
+- Major code refactor for better modularization.
+- Implemented enhanced security measures for input/output sanitization and SQL injection prevention.
 
 ### Version 1.1.2
 
-- Incorporated rate-limiting capabilities.
-- Boosted security through WordPress nonce utilization.
+- Added rate-limiting features.
+- Enhanced security through WordPress nonce utilization.
 
 ### Version 1.1.1
 
-- Resolved minor issues.
+- Fixed minor bugs.
 
 ### Version 1.1.0
 
-- Incorporated a feature to differentiate between WordPress.com and WordPress.org.
+- Added a feature to distinguish between WordPress.com and WordPress.org.
 
 ### Version 1.0.0
 
-- Initial product release.
+- Initial release.
 
 ## License
 
-This plugin is licensed under the MIT license. Comprehensive license details can be located within the LICENSE.txt document.
+This plugin is licensed under the MIT License. Comprehensive license details can be found in the LICENSE.txt file.
