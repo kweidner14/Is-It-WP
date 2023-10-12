@@ -20,7 +20,6 @@ function isitwp_check($atts = [], $content = null, $tag = '') {
     ob_start();
 
     // The input field with a nonce
-    $nonce = wp_create_nonce('isitwp_check_nonce');
     echo '<form method="post" id="check-wordpress">
         <input type="text" name="url" id="check-input-field" placeholder="Enter a URL" required>
         <input type="hidden" name="_wpnonce" value="'. esc_attr($nonce) .'">
@@ -29,7 +28,6 @@ function isitwp_check($atts = [], $content = null, $tag = '') {
 
     // Check if form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["url"])) {
-        if (wp_verify_nonce($_POST['_wpnonce'], 'isitwp_check_nonce')) {
             // Process input from form
             $url = filter_input(INPUT_POST, 'url', FILTER_SANITIZE_URL);
             $result = check_wordpress($url);
@@ -58,10 +56,7 @@ function isitwp_check($atts = [], $content = null, $tag = '') {
             // Insert URL into database table
             insert_url_to_db(esc_html('isitwp_urls'), $url, $db_output);
 
-        } else {
-            // The nonce is invalid, do not process the form
-            echo esc_html('Security check failed!');
-        }
+
     }
     return ob_get_clean();
 }
