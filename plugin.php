@@ -2,7 +2,7 @@
 /*
 Plugin Name: Is It WP Checker
 Description: A simple plugin to check if a website is built with WordPress.com or WordPress.org
-Version: 1.2.0
+Version: 1.2.1
 Author: Kyle Weidner
 */
 
