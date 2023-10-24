@@ -19,10 +19,8 @@ function isitwp_check($atts = [], $content = null, $tag = '') {
 
     ob_start();
 
-    // The input field with a nonce
     echo '<form method="post" id="check-wordpress">
         <input type="text" name="url" id="check-input-field" placeholder="Enter a URL" required>
-        <input type="hidden" name="_wpnonce" value="'. esc_attr($nonce) .'">
         <input type="submit" value="Check">
     </form>';
 
@@ -101,6 +99,8 @@ function check_wordpress($url) {
 
     // Try getting the content of the site
     $content = curl_exec($ch);
+
+    error_log($content);
 
     // If the attempt with 'http://' fails, try with 'https://'
     if ($content === false) {
