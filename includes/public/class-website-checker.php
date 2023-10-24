@@ -100,8 +100,6 @@ function check_wordpress($url) {
     // Try getting the content of the site
     $content = curl_exec($ch);
 
-    error_log($content);
-
     // If the attempt with 'http://' fails, try with 'https://'
     if ($content === false) {
         $url = str_replace('http://', 'https://', $url);
